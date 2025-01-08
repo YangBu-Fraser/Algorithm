@@ -32,6 +32,6 @@ public:
         head -> next = tail -> next;
         tail -> next = head;
         return p;
-        
+    
     }
 };

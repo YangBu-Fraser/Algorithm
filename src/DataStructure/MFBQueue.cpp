@@ -48,12 +48,11 @@ class Node {
     }
 
     void deletePre() {
-        if(this->pre = nullptr) { return ;}
+        if(this->pre == nullptr) { return ;}
         Node *p = this->pre;
         this->pre = p->pre;
-        p->pre->next = this;
         if(p->pre) { p->pre->next = this; }
-        delete p;  // release memery space
+        /*delete p; */
         return;
     }
 
@@ -62,7 +61,7 @@ class Node {
         Node *p = this->next;
         this->next = p->next;
         if(p->next) { p->next->pre = this;}
-        delete p;
+        /*delete p;*/
         return;
     }
 };
@@ -139,8 +138,8 @@ public:
     }
     
     void pushMiddle(int val) {
-        if(q1.size() > q2.size()) {
-            q2.pushFront(q1.pushBack());
+        if(q1.queueSize() > q2.queueSize()) {
+            q2.pushFront(q1.tailIndex());
             q1.popBack();
         }
         q1.pushBack(val);
@@ -171,22 +170,27 @@ public:
     
     int popBack() {
         if(isEmpty()) return -1;
-        int ret = q2.popBack();
+        int ret;
+        if (q2.isEmpty()) {
+            ret = q1.popBack();
+            } else {
+                ret = q2.popBack();
+            }
         update();
         return ret;
     }
 
     bool isEmpty(){
-        return q1.size() + q2.size() = 0;
+        return q1.queueSize() + q2.queueSize() == 0;
     }
 
     void update() {
-        if(q1.size() < q2.size()) {
+        if(q1.queueSize() < q2.queueSize()) {
             q1.pushBack(q2.frontIndex());
             q2.popFront();
         }
-        if(q1.size() == q2.size() + 2) {
-            q2.pushFront(q1.tail());
+        if(q1.queueSize() == q2.queueSize() + 2) {
+            q2.pushFront(q1.tailIndex());
             q1.popBack();
         }
         return;

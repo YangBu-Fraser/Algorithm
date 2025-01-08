@@ -20,7 +20,7 @@ public:
         if (n == 1) return head;
         ListNode *tail = head -> next, *p = __reverseNode(head -> next, n-1);
         head -> next = tail -> next;
-        tail -> next = headl
+        tail -> next = head;
         return p;
     }
 
@@ -28,13 +28,13 @@ public:
         ListNode *p = head;
         int cnt = n;
         while (--n && p) p = p -> next;
-        if (p == nullptr) return nullptr;
+        if (p == nullptr) return head;
         return __reverseNode(head, cnt);
     }
 
     ListNode* reverseKGroup(ListNode* head, int k) {
         ListNode ret(0, head), *p = &ret, *q = p -> next;
-        while (p -> next = reverseNode(q, k)) {
+        while ((p -> next = reverseNode(q, k)) != q) {
             p = q;
             q = p -> next;
         }

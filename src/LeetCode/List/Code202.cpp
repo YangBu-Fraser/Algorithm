@@ -9,7 +9,7 @@
  * or it loops endlessly in a cycle which does not include 1.
  * Those numbers for which this process ends in 1 are happy.
  * Return `true` if `n` is a happy number, and `false` if not.
-**/
+*/
 
 class Solution {
 public:
